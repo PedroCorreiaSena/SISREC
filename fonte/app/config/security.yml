@@ -1,0 +1,40 @@
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        AppBundle\Security\User: plaintext
+
+    role_hierarchy:
+        ROLE_GESTOR: ROLE_GESTOR
+        ROLE_EMPRESA: ROLE_EMPRESA
+        ROLE_ENCARREGADO: ROLE_ENCARREGADO
+        ROLE_SUPERVISAO: ROLE_SUPERVISAO
+        ROLE_SUPERVISAO: ROLE_ESTOQUISTA
+        ROLE_SUPERVISAO: ROLE_COMPRADOR
+        ROLE_RH: ROLE_RH
+
+    providers:
+        webservice:
+            id: user_provider
+
+    firewalls:
+        asset:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        admin_login:
+            pattern:  ^/login$
+            security: false
+
+        admin_area:
+            pattern:    ^/
+            form_login:
+                check_path: admin_security_check
+                login_path: admin_login
+                username_parameter: login[_username]
+                password_parameter: login[_password]
+            logout:
+                path:   admin_logout
+                target: admin_index
+
+    access_control:
+        - { path: ^/$, roles: [ROLE_GESTOR, ROLE_EMPRESA, ROLE_ENCARREGADO, ROLE_SUPERVISAO, ROLE_ESTOQUISTA, ROLE_COMPRADOR, ROLE_RH] }

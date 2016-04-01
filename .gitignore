@@ -1,0 +1,5 @@
+*.idea
+*.bak
+fonte/app/cache/
+fonte/vendor/
+fonte/app/logs/
