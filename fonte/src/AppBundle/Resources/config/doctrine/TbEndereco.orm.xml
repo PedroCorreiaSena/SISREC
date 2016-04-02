@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TbEndereco" table="TB_ENDERECO">
+    <indexes>
+      <index name="fk_TB_ENDERECO_TB_MUNICIPIO1_idx" columns="id_municipio"/>
+    </indexes>
+    <id name="idEndereco" type="integer" column="id_endereco">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="cep" type="string" column="cep" length="8" nullable="false"/>
+    <field name="endereco" type="string" column="endereco" length="100" nullable="false"/>
+    <field name="casa" type="string" column="casa" length="100" nullable="false"/>
+    <field name="bairro" type="string" column="bairro" length="100" nullable="false"/>
+    <field name="complemento" type="string" column="complemento" length="100" nullable="false"/>
+    <many-to-one field="idMunicipio" target-entity="TbMunicipio">
+      <join-columns>
+        <join-column name="id_municipio" referenced-column-name="id_municipio"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

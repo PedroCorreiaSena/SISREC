@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TbTpMaterial" table="TB_TP_MATERIAL">
+    <id name="idTpMaterial" type="integer" column="id_tp_material">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tpMaterial" type="string" column="tp_material" length="100" nullable="false"/>
+    <field name="stMaterial" type="boolean" column="st_material" nullable="false"/>
+  </entity>
+</doctrine-mapping>

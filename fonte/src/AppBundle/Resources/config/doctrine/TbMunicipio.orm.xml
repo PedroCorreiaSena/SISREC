@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TbMunicipio" table="TB_MUNICIPIO">
+    <indexes>
+      <index name="fk_TB_MUNICIPIO_TB_UF1_idx" columns="TB_UF_id_uf"/>
+    </indexes>
+    <id name="idMunicipio" type="integer" column="id_municipio"/>
+    <id name="tbUfUf" association-key="true"/>
+    <field name="nmMunicipio" type="string" column="nm_municipio" length="100" nullable="false"/>
+    <one-to-one field="tbUfUf" target-entity="TbUf">
+      <join-columns>
+        <join-column name="TB_UF_id_uf" referenced-column-name="id_uf"/>
+      </join-columns>
+    </one-to-one>
+  </entity>
+</doctrine-mapping>

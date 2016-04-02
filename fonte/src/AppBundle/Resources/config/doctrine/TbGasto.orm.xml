@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TbGasto" table="TB_GASTO">
+    <indexes>
+      <index name="fk_TB_GASTO_TB_TIPO_GASTO1_idx" columns="id_tp_gasto"/>
+      <index name="fk_TB_GASTO_TB_USUARIO1_idx" columns="cpf"/>
+    </indexes>
+    <id name="idGastos" type="integer" column="id_gastos">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="vlGasto" type="decimal" column="vl_gasto" precision="18" scale="2" nullable="false"/>
+    <field name="numNotaFiscal" type="integer" column="num_nota_fiscal" nullable="false"/>
+    <field name="qtGasto" type="integer" column="qt_gasto" nullable="false"/>
+    <field name="dtGasto" type="date" column="dt_gasto" nullable="false"/>
+    <field name="totalCompra" type="decimal" column="total_compra" precision="18" scale="2" nullable="false"/>
+    <field name="dtPagamento" type="date" column="dt_pagamento" nullable="false"/>
+    <field name="stPagamento" type="boolean" column="st_pagamento" nullable="false"/>
+    <many-to-one field="cpf" target-entity="TbUsuario">
+      <join-columns>
+        <join-column name="cpf" referenced-column-name="cpf"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTpGasto" target-entity="TbTipoGasto">
+      <join-columns>
+        <join-column name="id_tp_gasto" referenced-column-name="id_tp_gasto"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
