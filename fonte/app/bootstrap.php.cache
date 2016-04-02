@@ -146,7 +146,7 @@ ksort($this->headers);
 foreach ($this->headers as $name => $values) {
 $name = implode('-', array_map('ucfirst', explode('-', $name)));
 foreach ($values as $value) {
-$content .= sprintf("%-{$max}s %s\r\r\n", $name.':', $value);
+$content .= sprintf("%-{$max}s %s\r\n", $name.':', $value);
 }
 }
 return $content;
@@ -621,8 +621,8 @@ $content = $this->getContent();
 return trigger_error($e, E_USER_ERROR);
 }
 return
-sprintf('%s %s %s', $this->getMethod(), $this->getRequestUri(), $this->server->get('SERVER_PROTOCOL'))."\r\r\n".
-$this->headers."\r\r\n".
+sprintf('%s %s %s', $this->getMethod(), $this->getRequestUri(), $this->server->get('SERVER_PROTOCOL'))."\r\n".
+$this->headers."\r\n".
 $content;
 }
 public function overrideGlobals()
@@ -1374,8 +1374,8 @@ return new static($content, $status, $headers);
 public function __toString()
 {
 return
-sprintf('HTTP/%s %s %s', $this->version, $this->statusCode, $this->statusText)."\r\r\n".
-$this->headers."\r\r\n".
+sprintf('HTTP/%s %s %s', $this->version, $this->statusCode, $this->statusText)."\r\n".
+$this->headers."\r\n".
 $this->getContent();
 }
 public function __clone()
@@ -1823,7 +1823,7 @@ public function __toString()
 {
 $cookies ='';
 foreach ($this->getCookies() as $cookie) {
-$cookies .='Set-Cookie: '.$cookie."\r\r\n";
+$cookies .='Set-Cookie: '.$cookie."\r\n";
 }
 ksort($this->headerNames);
 return parent::__toString().$cookies;
@@ -2629,10 +2629,10 @@ protected function buildContainer()
 foreach (array('cache'=> $this->getCacheDir(),'logs'=> $this->getLogDir()) as $name => $dir) {
 if (!is_dir($dir)) {
 if (false === @mkdir($dir, 0777, true) && !is_dir($dir)) {
-throw new \RuntimeException(sprintf("Unable to create the %s directory (%s)\r\n", $name, $dir));
+throw new \RuntimeException(sprintf("Unable to create the %s directory (%s)\n", $name, $dir));
 }
 } elseif (!is_writable($dir)) {
-throw new \RuntimeException(sprintf("Unable to write in the %s directory (%s)\r\n", $name, $dir));
+throw new \RuntimeException(sprintf("Unable to write in the %s directory (%s)\n", $name, $dir));
 }
 }
 $container = $this->getContainerBuilder();
@@ -2718,7 +2718,7 @@ if ($ignoreSpace) {
 $ignoreSpace = false;
 continue;
 }
-$rawChunk .= preg_replace(array('/\r\n{2,}/S'),"\r\n", $token[1]);
+$rawChunk .= preg_replace(array('/\n{2,}/S'),"\n", $token[1]);
 } elseif (in_array($token[0], array(T_COMMENT, T_DOC_COMMENT))) {
 $ignoreSpace = true;
 } else {
