@@ -8,12 +8,11 @@ class LoginType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('_username', 'text', array(
-            'label' => 'E-mail',
+            'label' => 'CPF',
             'attr' => array(
                 'class' => 'form-control',
-                'placeholder' => 'E-mail:',
-                'maxlength' => 45,
-                'maskcpfcnpj' => 'maskcpfcnpj'
+                'placeholder' => 'CPF:',
+                'maxlength' => 45
             )
         ));
 
@@ -22,6 +21,7 @@ class LoginType extends AbstractType
             'attr' => array(
                 'class' => 'form-control',
                 'placeholder' => 'Senha:',
+                'maxlength' => 6
             )
         ));
 

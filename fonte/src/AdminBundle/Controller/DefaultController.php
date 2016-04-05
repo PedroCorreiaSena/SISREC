@@ -16,23 +16,25 @@ class DefaultController extends Controller
      * @Route("/", name="admin_index")
      */
     public function indexAction() {
-        /*$username = $this->get('security.context')->getToken()->getUser()->getUsername();
+        $username = $this->get('security.context')->getToken()->getUser()->getUsername();
 
         if($this->get('session')->get('username') != $username) {
             $em = $this->getDoctrine()->getManager();
 
             $qb = $em->createQueryBuilder();
-            $qb->select('u.seqUsuario, u.nomUsuario, u.desNivel')
-                ->from('AppBundle:TblUsuario', 'u')
-                ->where('u.desEmail = :desEmail')
-                ->setParameter('desEmail', $username);
+            $qb->select('u.cpf, u.nmUsuario')
+                ->from('AppBundle:TbUsuario', 'u')
+                ->where('u.cpf = :cpf')
+                ->setParameter('cpf', str_replace('.', '', str_replace('-', '', $username)));
 
             $rsUsuario = $qb->getQuery()->getSingleResult();
 
-            $this->get('session')->set('seqUsuario', $rsUsuario['seqUsuario']);
-            $this->get('session')->set('nomUsuario', $rsUsuario['nomUsuario']);
-            $this->get('session')->set('desNivel', str_replace('ROLE_', '', $rsUsuario['desNivel']));
-        }*/
+            $this->get('session')->set('username', $username);
+            $this->get('session')->set('cpf', '-', '', $rsUsuario['cpf']);
+            $this->get('session')->set('nmUsuario', $rsUsuario['nmUsuario']);
+
+            $this->get('session')->getFlashBag()->add('notice', "Obrigado pelo acesso");
+        }
 
         return $this->render('AdminBundle:Default:index.html.twig');
     }

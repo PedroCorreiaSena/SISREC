@@ -38,7 +38,7 @@
                         <div class="panel-body">
                             {% if error %}
                                 <div class="alert alert-danger" role="alert">
-                                    Login ou senha inválidos.
+                                    Usuário ou senha inválida
                                     <!--{{ error.message }}-->
                                 </div>
                             {% endif %}
@@ -56,7 +56,7 @@
         </form>
     </div>
     <script type="text/javascript">
-            $('[name="j_username"]').mask('999.999.999-99');
+            $('#login__username').mask('999.999.999-99');
     </script>
 </body>
 </html>
