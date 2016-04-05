@@ -1,30 +1,9 @@
 {% extends "AdminBundle:Default:layout.html.twig" %}
 
 {% block titulo %}
-    {% if app.security.granted('ROLE_ADMIN') %}ADMIN{% endif %}
-    {% if not app.security.granted('ROLE_ADMIN') %}
-        {% if app.security.granted('ROLE_GESTOR') %}GESTOR{% endif %}
-        {% if app.security.granted('ROLE_EMPRESA') %}EMPRESA{% endif %}
-        {% if app.security.granted('ROLE_ENCARREGADO') %}ENCARREGADO{% endif %}
-        {% if app.security.granted('ROLE_SUPERVISAO') %}SUPERVISÃO{% endif %}
-        {% if app.security.granted('ROLE_ESTOQUISTA') %}ESTOQUISTA{% endif %}
-        {% if app.security.granted('ROLE_COMPRADOR') %}COMPRADOR{% endif %}
-        {% if app.security.granted('ROLE_RH') %}RH{% endif %}
-    {% endif %}
+    Olá
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        {% for role in ['ROLE_GESTOR', 'ROLE_EMPRESA', 'ROLE_ENCARREGADO', 'ROLE_SUPERVISAO', 'ROLE_ESTOQUISTA', 'ROLE_COMPRADOR', 'ROLE_RH'] %}
-            {% if app.security.granted(role) %}
-                {% for item in get_menu(role) %}
-                    {% include "AdminBundle:Util:partialThumbLink.html.twig" with {
-                    'url': path(item.url),
-                    'icon': item.icon,
-                    'label': item.label
-                    } only %}
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
-    </div>
+    Olá
 {% endblock %}

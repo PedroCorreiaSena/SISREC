@@ -1,0 +1,175 @@
+.panel-datatable-ctrls {
+    width: auto;
+    float: right;
+    padding: 0px;
+    margin: 0px;
+}
+
+.panel-datatable-ctrls label {
+    margin-bottom: 0;
+}
+
+.panel-heading::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+#datatable {
+    margin-bottom:0px!important;
+}
+
+table.dataTable {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+div.dataTables_paginate {
+    font-size: 0;
+}
+div.dataTables_paginate,
+div.dataTables_paginate ul,
+div.dataTables_paginate li {
+    margin: 0 !important;
+}
+
+div.dataTables_paginate a{
+    font-size: 12px;
+}
+
+div.dataTables_info {
+    font-size: 12px;
+    padding: 0 !important;
+}
+
+.fa {
+    margin: 0 2px;
+}
+
+a.fa {
+    text-decoration: none;
+}
+
+.icon-st-vermelho {color: #D31901}
+.icon-st-laranja {color: #e6c111}
+.icon-st-verde {color: #0A940A}
+
+/* CORES SISTEMA */
+body {
+    background-color: #71B1D1;
+    font-size: 12px;
+}
+
+.navbar a {
+    color: #FFF;
+}
+
+.navbar .navbar-brand {
+    color: #FFF;
+}
+
+.navbar-default {
+    background: #3C454F;
+    border: 0 none;
+}
+
+.navbar #side-menu a {
+    background: #71B1D1;
+}
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+    border: none;
+}
+
+.navbar #side-menu .active,
+.navbar #side-menu .active a{
+    background: #519BBD;
+}
+
+.nav > li > a:hover {
+    background: #519BBD
+}
+
+.nav .open > a, .nav .open > a:hover,
+.nav .open > a:focus {
+    background: #71B1D1;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus{
+    background: #71B1D1;
+}
+
+.sidebar ul li {
+    border: none;
+}
+
+.navbar-default .navbar-toggle {
+    border: 0 none;
+}
+
+@media (max-width: 767px) {
+    #datatable_info {
+        text-align: center;
+        margin-bottom: 5px !important;
+    }
+
+    #datatable_paginate .pagination {
+        float: none !important;
+    }
+
+    .panel-datatable-ctrls {
+        width: 100%;
+        padding-top: 10px !important;
+    }
+
+    #datatable_filter input {
+        width: auto;
+    }
+}
+
+.uploadifive-button {
+    display: block;
+    padding: 1px 6px;
+    height: initial !important;
+    line-height: initial !important;
+    overflow: initial !important;
+    cursor: pointer !important;
+    margin: 0;
+    background: #00abec;
+    font-size: 18px;
+    color: #FFF;
+    border: 0;
+}
+
+.uploadifive-button input {
+    cursor: pointer;
+    font-size: 14px !important;
+    width: 100% !important;
+    right: 0 !important;
+    top: 0 !important;
+}
+
+.uploadifive-queue-item {
+    padding: 5px;
+    border: 1px solid #ccc;
+    background: #fafafa;
+    font-size: 10px;
+    margin: 5px 0;
+    display: inline-block;
+    width: 236px;
+}
+
+.uploadifive-queue-item .progress {
+    border: 1px solid #D0D0D0;
+    height: 3px;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.uploadifive-queue-item .progress-bar {
+    background-color: #0072BC;
+    height: 3px;
+    width: 0;
+}
