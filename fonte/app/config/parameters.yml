@@ -1,11 +1,11 @@
 # This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
-    database_host: 127.0.0.1
+    database_host: ##DB_URL##
     database_port: null
     database_name: sisrec
-    database_user: root
-    database_password: '010203'
+    database_user: ##DB_USERNAME##
+    database_password: '##DB_PASSWORD##'
     mailer_transport: mail
     mailer_host: 127.0.0.1
     mailer_user: null
