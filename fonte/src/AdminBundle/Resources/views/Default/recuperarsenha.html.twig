@@ -1,0 +1,25 @@
+{% extends "AdminBundle:Default:layoutExterno.html.twig" %}
+{% block content %}
+    <div class="panel panel-default" style="margin-top: 20px">
+        <div class="panel-heading">
+            SISREC - Recuperar Senha
+        </div>
+        <div class="panel-body">
+            <form method="post" action="{{ path('admin_recuperarsenha') }}">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">{{ form_row(form.email) }}</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">{{ form_row(form.email_c) }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-right">
+                        <button type="submit" class="btn btn-primary">Recuperar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

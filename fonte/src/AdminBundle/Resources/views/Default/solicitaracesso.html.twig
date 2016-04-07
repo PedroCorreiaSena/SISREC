@@ -1,0 +1,83 @@
+{% extends "AdminBundle:Default:layoutExterno.html.twig" %}
+{% block content %}
+    <div class="panel panel-default" style="margin-top: 20px">
+        <div class="panel-heading">
+            SISREC - Solicitar Acesso
+        </div>
+        <div class="panel-body">
+            <form method="post" action="{{ path('admin_solicitaracesso') }}">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">{{ form_row(form.nmUsuario) }}</div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">{{ form_row(form.sexo) }}</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">{{ form_row(form.cpf) }}</div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">{{ form_row(form.dtNascimento) }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">{{ form_row(form.email) }}</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">{{ form_row(form.email_c) }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group">{{ form_row(form.ddd_p) }}</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">{{ form_row(form.telefone_p) }}</div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">{{ form_row(form.ddd_a) }}</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">{{ form_row(form.telefone_a) }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">{{ form_row(form.cep) }}</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">{{ form_row(form.uf) }}</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">{{ form_row(form.cidade) }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">{{ form_row(form.endereco) }}</div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">{{ form_row(form.casa) }}</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">{{ form_row(form.bairro) }}</div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">{{ form_row(form.complemento) }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">{{ form_row(form.observacao) }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-right">
+                        <button type="submit" class="btn btn-primary">Solicitar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
