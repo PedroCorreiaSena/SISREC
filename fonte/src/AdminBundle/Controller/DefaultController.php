@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\Form\UsuarioType;
 use AppBundle\Form\LoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,4 +68,26 @@ class DefaultController extends Controller
      * @Route("/logout", name="admin_logout")
      */
     public function logoutAction(){}
+
+    /**
+     * @Route("/solicitaracesso", name="admin_solicitaracesso")
+     */
+    public function solicitaracessoAction() {
+        $form = $this->createForm(new UsuarioType());
+
+        return $this->render('AdminBundle:Default:solicitarAcesso.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/recuperarsenha", name="admin_recuperarsenha")
+     */
+    public function recuperarsenhaAction() {
+        $form = $this->createForm(new UsuarioType());
+
+        return $this->render('AdminBundle:Default:recuperarSenha.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 }
