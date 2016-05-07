@@ -3,6 +3,9 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Form\UsuarioType;
+use AppBundle\Entity\TbEndereco;
+use AppBundle\Entity\TbTelefone;
+use AppBundle\Entity\TbUsuario;
 use AppBundle\Form\LoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,6 +77,53 @@ class DefaultController extends Controller
      */
     public function solicitaracessoAction() {
         $form = $this->createForm(new UsuarioType());
+        $em = $this->getDoctrine()->getManager();
+
+        if($this->get('request')->getMethod() == 'POST') {
+            $form->handleRequest($this->get('request'));
+            $usuario = new TbUsuario();
+
+            try{
+                $usuario->setCpf(str_replace('.', '', str_replace('-', '', $form->get('cpf')->getData())));
+                $usuario->setNmUsuario($form->get('nmUsuario')->getData());
+                $usuario->setEmail($form->get('email')->getData());
+                $usuario->setObservacao($form->get('observacao')->getData());
+                $usuario->setSenha('010203');
+                $usuario->setTpSexo($form->get('sexo')->getData());
+                $usuario->setCep($form->get('cep')->getData());
+                $usuario->setUf($form->get('uf')->getData());
+                $usuario->setEndereco($form->get('endereco')->getData());
+                $usuario->setCidade($form->get('cidade')->getData());
+                $usuario->setBairro($form->get('bairro')->getData());
+                $usuario->setComplemento($form->get('complemento')->getData());
+                $usuario->setComplemento($form->get('complemento')->getData());
+                $usuario->setStUsuario(true);
+
+                $usuario->setIdPerfil($em->getRepository('AppBundle:TbPerfil')->find(2));
+
+                $em->persist($usuario);
+                $em->flush();
+
+                // TELEFONE
+                $telefone = new TbTelefone();
+                $telefone->setIdUsuario($usuario);
+                $telefone->setDddTelefone($form->get('ddd_p')->getData());
+                $telefone->setNumTelefone($form->get('telefone_p')->getData());
+                $em->persist($telefone);
+                $em->flush();
+
+                $telefone = new TbTelefone();
+                $telefone->setIdUsuario($usuario);
+                $telefone->setDddTelefone($form->get('ddd_a')->getData());
+                $telefone->setNumTelefone($form->get('telefone_a')->getData());
+                $em->persist($telefone);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add('notice', "Cadastro realizado com sucesso! Será enviada uma confirmação de cadastro para o e-mail informado");
+            } catch(\Exception $e){
+                $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
+            }
+        }
 
         return $this->render('AdminBundle:Default:solicitarAcesso.html.twig', array(
             'form' => $form->createView(),

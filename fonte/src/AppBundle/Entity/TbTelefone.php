@@ -15,9 +15,19 @@ class TbTelefone
     private $dddTelefone;
 
     /**
+     * @var string
+     */
+    private $numTelefone;
+
+    /**
      * @var integer
      */
     private $idTelefone;
+
+    /**
+     * @var \AppBundle\Entity\TbUsuario
+     */
+    private $idUsuario;
 
 
     /**
@@ -44,6 +54,29 @@ class TbTelefone
     }
 
     /**
+     * Set numTelefone
+     *
+     * @param string $numTelefone
+     * @return TbTelefone
+     */
+    public function setNumTelefone($numTelefone)
+    {
+        $this->numTelefone = $numTelefone;
+
+        return $this;
+    }
+
+    /**
+     * Get numTelefone
+     *
+     * @return string 
+     */
+    public function getNumTelefone()
+    {
+        return $this->numTelefone;
+    }
+
+    /**
      * Get idTelefone
      *
      * @return integer 
@@ -51,5 +84,28 @@ class TbTelefone
     public function getIdTelefone()
     {
         return $this->idTelefone;
+    }
+
+    /**
+     * Set idUsuario
+     *
+     * @param \AppBundle\Entity\TbUsuario $idUsuario
+     * @return TbTelefone
+     */
+    public function setIdUsuario(\AppBundle\Entity\TbUsuario $idUsuario = null)
+    {
+        $this->idUsuario = $idUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get idUsuario
+     *
+     * @return \AppBundle\Entity\TbUsuario 
+     */
+    public function getIdUsuario()
+    {
+        return $this->idUsuario;
     }
 }

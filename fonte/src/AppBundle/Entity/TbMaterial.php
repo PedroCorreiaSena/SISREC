@@ -47,7 +47,7 @@ class TbMaterial
     /**
      * @var \AppBundle\Entity\TbUsuario
      */
-    private $cpf;
+    private $idUsuario;
 
 
     /**
@@ -199,25 +199,25 @@ class TbMaterial
     }
 
     /**
-     * Set cpf
+     * Set idUsuario
      *
-     * @param \AppBundle\Entity\TbUsuario $cpf
+     * @param \AppBundle\Entity\TbUsuario $idUsuario
      * @return TbMaterial
      */
-    public function setCpf(\AppBundle\Entity\TbUsuario $cpf = null)
+    public function setIdUsuario(\AppBundle\Entity\TbUsuario $idUsuario = null)
     {
-        $this->cpf = $cpf;
+        $this->idUsuario = $idUsuario;
 
         return $this;
     }
 
     /**
-     * Get cpf
+     * Get idUsuario
      *
      * @return \AppBundle\Entity\TbUsuario 
      */
-    public function getCpf()
+    public function getIdUsuario()
     {
-        return $this->cpf;
+        return $this->idUsuario;
     }
 }

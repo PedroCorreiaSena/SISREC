@@ -2,8 +2,8 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="AppBundle\Entity\TbMaterial" table="TB_MATERIAL">
     <indexes>
-      <index name="fk_TB_MATERIAL_TB_USUARIO1_idx" columns="cpf"/>
       <index name="fk_TB_MATERIAL_TB_TP_MATERIAL1_idx" columns="id_tp_material"/>
+      <index name="fk_TB_MATERIAL_TB_USUARIO1_idx" columns="id_usuario"/>
     </indexes>
     <id name="idMaterial" type="integer" column="id_material">
       <generator strategy="IDENTITY"/>
@@ -18,9 +18,9 @@
         <join-column name="id_tp_material" referenced-column-name="id_tp_material"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="cpf" target-entity="TbUsuario">
+    <many-to-one field="idUsuario" target-entity="TbUsuario">
       <join-columns>
-        <join-column name="cpf" referenced-column-name="cpf"/>
+        <join-column name="id_usuario" referenced-column-name="id_usuario"/>
       </join-columns>
     </many-to-one>
   </entity>

@@ -2,37 +2,27 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="AppBundle\Entity\TbUsuario" table="TB_USUARIO">
     <indexes>
-      <index name="fk_TB_USUARIO_TB_SEXO1_idx" columns="id_sexo"/>
-      <index name="fk_TB_USUARIO_TB_ENDERECO1_idx" columns="id_endereco"/>
-      <index name="fk_TB_USUARIO_TB_TELEFONE1_idx" columns="id_telefone"/>
       <index name="fk_TB_USUARIO_TB_PERFIL1_idx" columns="id_perfil"/>
     </indexes>
-    <id name="cpf" type="string" column="cpf" length="11">
+    <id name="idUsuario" type="integer" column="id_usuario">
       <generator strategy="IDENTITY"/>
     </id>
+    <field name="cpf" type="string" column="cpf" length="11" nullable="false"/>
     <field name="nmUsuario" type="string" column="nm_usuario" length="100" nullable="false"/>
     <field name="email" type="string" column="email" length="100" nullable="false"/>
     <field name="observacao" type="string" column="observacao" length="4000" nullable="true"/>
     <field name="senha" type="string" column="senha" length="45" nullable="false"/>
+    <field name="tpSexo" type="string" column="tp_sexo" length="9" nullable="false"/>
+    <field name="cep" type="string" column="cep" length="8" nullable="false"/>
+    <field name="uf" type="string" column="uf" length="2" nullable="false"/>
+    <field name="endereco" type="string" column="endereco" length="100" nullable="false"/>
+    <field name="cidade" type="string" column="cidade" length="100" nullable="false"/>
+    <field name="bairro" type="string" column="bairro" length="100" nullable="false"/>
+    <field name="complemento" type="string" column="complemento" length="100" nullable="false"/>
     <field name="stUsuario" type="boolean" column="st_usuario" nullable="false"/>
     <many-to-one field="idPerfil" target-entity="TbPerfil">
       <join-columns>
         <join-column name="id_perfil" referenced-column-name="id_perfil"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="idTelefone" target-entity="TbTelefone">
-      <join-columns>
-        <join-column name="id_telefone" referenced-column-name="id_telefone"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="idEndereco" target-entity="TbEndereco">
-      <join-columns>
-        <join-column name="id_endereco" referenced-column-name="id_endereco"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="idSexo" target-entity="TbSexo">
-      <join-columns>
-        <join-column name="id_sexo" referenced-column-name="id_sexo"/>
       </join-columns>
     </many-to-one>
   </entity>

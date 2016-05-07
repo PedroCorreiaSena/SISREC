@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="AppBundle\Entity\TbTelefone" table="TB_TELEFONE">
+    <indexes>
+      <index name="fk_TB_TELEFONE_TB_USUARIO1_idx" columns="id_usuario"/>
+    </indexes>
     <id name="idTelefone" type="integer" column="id_telefone">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="dddTelefone" type="string" column="ddd_telefone" length="9" nullable="false"/>
+    <field name="numTelefone" type="string" column="num_telefone" length="45" nullable="false"/>
+    <many-to-one field="idUsuario" target-entity="TbUsuario">
+      <join-columns>
+        <join-column name="id_usuario" referenced-column-name="id_usuario"/>
+      </join-columns>
+    </many-to-one>
   </entity>
 </doctrine-mapping>

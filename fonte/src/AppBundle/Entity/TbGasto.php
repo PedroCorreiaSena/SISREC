@@ -50,14 +50,14 @@ class TbGasto
     private $idGastos;
 
     /**
-     * @var \AppBundle\Entity\TbUsuario
-     */
-    private $cpf;
-
-    /**
      * @var \AppBundle\Entity\TbTipoGasto
      */
     private $idTpGasto;
+
+    /**
+     * @var \AppBundle\Entity\TbUsuario
+     */
+    private $idUsuario;
 
 
     /**
@@ -232,29 +232,6 @@ class TbGasto
     }
 
     /**
-     * Set cpf
-     *
-     * @param \AppBundle\Entity\TbUsuario $cpf
-     * @return TbGasto
-     */
-    public function setCpf(\AppBundle\Entity\TbUsuario $cpf = null)
-    {
-        $this->cpf = $cpf;
-
-        return $this;
-    }
-
-    /**
-     * Get cpf
-     *
-     * @return \AppBundle\Entity\TbUsuario 
-     */
-    public function getCpf()
-    {
-        return $this->cpf;
-    }
-
-    /**
      * Set idTpGasto
      *
      * @param \AppBundle\Entity\TbTipoGasto $idTpGasto
@@ -275,5 +252,28 @@ class TbGasto
     public function getIdTpGasto()
     {
         return $this->idTpGasto;
+    }
+
+    /**
+     * Set idUsuario
+     *
+     * @param \AppBundle\Entity\TbUsuario $idUsuario
+     * @return TbGasto
+     */
+    public function setIdUsuario(\AppBundle\Entity\TbUsuario $idUsuario = null)
+    {
+        $this->idUsuario = $idUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get idUsuario
+     *
+     * @return \AppBundle\Entity\TbUsuario 
+     */
+    public function getIdUsuario()
+    {
+        return $this->idUsuario;
     }
 }
