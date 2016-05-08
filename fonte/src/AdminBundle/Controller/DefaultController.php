@@ -3,7 +3,6 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Form\UsuarioType;
-use AppBundle\Entity\TbEndereco;
 use AppBundle\Entity\TbTelefone;
 use AppBundle\Entity\TbUsuario;
 use AppBundle\Form\LoginType;

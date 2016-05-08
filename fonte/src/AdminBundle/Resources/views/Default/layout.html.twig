@@ -78,6 +78,13 @@
                         <i class="fa fa-dashboard fa-fw"></i> Dashboard
                         </a>
                     </li>
+                    {% if app.security.granted('ROLE_ADMIN') %}
+                    <li>
+                        <a href="{{ path('admin_tipomaterial_listar') }}">
+                            <i class="fa fa-cube fa-fw"></i> Manter tipo de Material Reciclável
+                        </a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
