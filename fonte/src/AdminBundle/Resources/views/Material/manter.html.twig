@@ -1,0 +1,39 @@
+{% extends "AdminBundle:Default:layout.html.twig" %}
+
+{% block titulo %}
+    Formulário de Cadastro de Material
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{{ path('admin_material_manter', {'idMaterial': idMaterial}) }}">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">{{ form_row(form.idTpMaterial) }}</div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">{{ form_row(form.qtMaterial) }}</div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">{{ form_row(form.vlMaterial) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">{{ form_row(form.dsMaterial) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">
+                    {% if idMaterial %}
+                        Alterar
+                    {% else %}
+                        Incluir
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

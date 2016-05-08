@@ -30,7 +30,7 @@ class TipoMaterialController extends Controller
             $tipoMaterial = $em->getRepository('AppBundle:TbTpMaterial')->find($idTpMaterial);
 
             if(!$tipoMaterial){
-                throw new NotFoundHttpException('Cargo não encontrado!');
+                throw new NotFoundHttpException('Tipo Material não encontrado!');
             }
         }else{
             $tipoMaterial = new TbTpMaterial();

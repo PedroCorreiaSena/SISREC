@@ -25,7 +25,7 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $qb = $em->createQueryBuilder();
-            $qb->select('u.cpf, u.nmUsuario')
+            $qb->select('u.cpf, u.nmUsuario, u.idUsuario')
                 ->from('AppBundle:TbUsuario', 'u')
                 ->where('u.cpf = :cpf')
                 ->setParameter('cpf', str_replace('.', '', str_replace('-', '', $username)));
@@ -35,6 +35,7 @@ class DefaultController extends Controller
             $this->get('session')->set('username', $username);
             $this->get('session')->set('cpf', '-', '', $rsUsuario['cpf']);
             $this->get('session')->set('nmUsuario', $rsUsuario['nmUsuario']);
+            $this->get('session')->set('idUsuario', $rsUsuario['idUsuario']);
 
             $this->get('session')->getFlashBag()->add('notice', "Obrigado pelo acesso");
         }
