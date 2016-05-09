@@ -170,6 +170,11 @@ class UsuarioType extends AbstractType
                 'class' => 'form-control'
             )
         ));
+
+        $builder->add('stUsuario', 'hidden', array(
+            'label' => 'Situação',
+            'required' => false
+        ));
     }
 
     public function getName() {

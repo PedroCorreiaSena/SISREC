@@ -102,7 +102,7 @@ class DefaultController extends Controller
                 $usuario->setBairro($form->get('bairro')->getData());
                 $usuario->setCep(str_replace('.', '', str_replace('-', '', $form->get('cep')->getData())));
                 $usuario->setComplemento($form->get('complemento')->getData());
-                $usuario->setStUsuario(true);
+                $usuario->setStUsuario(false);
 
                 $usuario->setIdPerfil($em->getRepository('AppBundle:TbPerfil')->find(2));
 
@@ -140,6 +140,48 @@ class DefaultController extends Controller
      */
     public function recuperarsenhaAction() {
         $form = $this->createForm(new UsuarioType());
+        $em = $this->getDoctrine()->getManager();
+
+        if($this->get('request')->getMethod() == 'POST') {
+            $form->handleRequest($this->get('request'));
+
+            $qb = $em->createQueryBuilder();
+            $qb->select('u')
+                ->from('AppBundle:TbUsuario', 'u')
+                ->where('u.email = :email')
+                ->setParameter('email', $form->get('email')->getData());
+
+            $rsUsuario = $qb->getQuery()->getOneOrNullResult();
+
+            if($rsUsuario){
+                try {
+                    $body = $this->renderView('AdminBundle:Util:emailRecuperarAcesso.html.twig', array(
+                        'nome' => $rsUsuario->getNmUsuario(),
+                        'email' => $rsUsuario->getEmail(),
+                        'login' => $rsUsuario->getCpf(),
+                        'senha' => $rsUsuario->getSenha()
+                    ));
+
+                    $message = \Swift_Message::newInstance()
+                        ->setSubject("Recuperação Acesso SISREC")
+                        ->setTo($rsUsuario->getEmail())
+                        ->setFrom('no-reply@sisrec.com.br')
+                        ->setContentType("text/html")
+                        ->setBody($body);
+
+                    $this->get('mailer')->send($message);
+
+                    $msg = "Solicitação de recuperação de senha enviada com sucesso! ";
+                    $msg .= "Aguarde o recebimento do e-mail de recuperação ";
+
+                    $this->get('session')->getFlashBag()->add('notice', $msg);
+                }catch(\Exception $e){
+                    $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
+                }
+            }else{
+                $this->get('session')->getFlashBag()->add('warning', "Cadastro Inexistente");
+            }
+        }
 
         return $this->render('AdminBundle:Default:recuperarSenha.html.twig', array(
             'form' => $form->createView(),

@@ -118,6 +118,56 @@ class UsuarioController extends Controller
 
         return $this->render('AdminBundle:Usuario:manter.html.twig', array(
             'form' => $form->createView(),
+            'idUsuario' => $idUsuario,
+            'usuario' => $usuario
+        ));
+    }
+
+    /**
+     * @Route("usuario/situacao/{idUsuario}", name="admin_usuario_situacao")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function situacaoAction($idUsuario) {
+        $form = $this->createForm(new UsuarioType());
+        $em = $this->getDoctrine()->getManager();
+
+        if($this->get('request')->getMethod() == 'POST') {
+            $form->handleRequest($this->get('request'));
+
+            $usuario = $em->getRepository('AppBundle:TbUsuario')->find($idUsuario);
+
+            $usuario->setStUsuario($form->get('stUsuario')->getData());
+
+            if($usuario->getStUsuario()) {
+                $usuario->setSenha(substr(md5(uniqid()), 1, 6));
+
+                try {
+                    $body = $this->renderView('AdminBundle:Util:emailRecuperarAcesso.html.twig', array(
+                        'login' => $usuario->getCpf(),
+                        'senha' => $usuario->getSenha()
+                    ));
+
+                    $message = \Swift_Message::newInstance()
+                        ->setSubject("E-mail de aprovação de acesso")
+                        ->setTo($usuario->getEmail())
+                        ->setFrom('no-reply@sisrec.com.br')
+                        ->setContentType("text/html")
+                        ->setBody($body);
+
+                    $this->get('mailer')->send($message);
+
+                    $this->get('session')->getFlashBag()->add('notice', "Usuário aprovado com sucesso");
+                }catch(\Exception $e){
+                    $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
+                }
+            }else{
+                $this->get('session')->getFlashBag()->add('notice', "Usuário reprovado com sucesso");
+            }
+
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('admin_usuario_manter', array(
             'idUsuario' => $idUsuario
         ));
     }

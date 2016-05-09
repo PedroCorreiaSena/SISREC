@@ -10,14 +10,38 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary">
-                    {% if idUsuario %}
-                        Alterar
-                    {% else %}
-                        Incluir
-                    {% endif %}
-                </button>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button type="submit" class="btn btn-primary pull-right">
+                            {% if idUsuario %}
+                                Alterar Cadastro
+                            {% else %}
+                                Incluir
+                            {% endif %}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
+
+    {% if idUsuario %}
+        <div class="panel panel-primary">
+            <div class="panel-heading">Aprovação</div>
+            <div class="panel-body">
+                {% if usuario.stUsuario %}
+                    <form method="post" action="{{ path('admin_usuario_situacao', {'idUsuario': idUsuario}) }}">
+                        <input type="hidden" name="usuario[stUsuario]" value="0">
+                        <button type="submit" class="btn btn-danger">Reprovar Solicitação de Acesso</button>
+                    </form>
+                {% else %}
+                    <form method="post" action="{{ path('admin_usuario_situacao', {'idUsuario': idUsuario}) }}">
+                        <input type="hidden" name="usuario[stUsuario]" value="1">
+                        <button type="submit" class="btn btn-primary">Aprovar Solicitação de Acesso</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
