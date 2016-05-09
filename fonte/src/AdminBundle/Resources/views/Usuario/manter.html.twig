@@ -1,0 +1,23 @@
+{% extends "AdminBundle:Default:layout.html.twig" %}
+
+{% block titulo %}
+    Formulário de Cadastro de Acesso
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{{ path('admin_usuario_manter', {'idUsuario': idUsuario}) }}">
+        {% include 'AdminBundle:Usuario:manterUtil.html.twig' %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">
+                    {% if idUsuario %}
+                        Alterar
+                    {% else %}
+                        Incluir
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

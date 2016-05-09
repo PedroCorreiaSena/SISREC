@@ -1,9 +1,17 @@
 {% extends "AdminBundle:Default:layout.html.twig" %}
 
 {% block titulo %}
-    Olá
+    {% if app.security.granted('ROLE_ADMIN') %}
+        Solicitações de acesso
+    {% else %}
+        Olá
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-    Olá
+    {% if app.security.granted('ROLE_ADMIN') %}
+        {% include 'AdminBundle:Usuario:listarUtil.html.twig' %}
+    {% else %}
+        Olá
+    {% endif %}
 {% endblock %}

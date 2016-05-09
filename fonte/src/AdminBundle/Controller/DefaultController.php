@@ -20,10 +20,9 @@ class DefaultController extends Controller
      */
     public function indexAction() {
         $username = $this->get('security.context')->getToken()->getUser()->getUsername();
+        $em = $this->getDoctrine()->getManager();
 
         if($this->get('session')->get('username') != $username) {
-            $em = $this->getDoctrine()->getManager();
-
             $qb = $em->createQueryBuilder();
             $qb->select('u.cpf, u.nmUsuario, u.idUsuario')
                 ->from('AppBundle:TbUsuario', 'u')
@@ -40,7 +39,13 @@ class DefaultController extends Controller
             $this->get('session')->getFlashBag()->add('notice', "Obrigado pelo acesso");
         }
 
-        return $this->render('AdminBundle:Default:index.html.twig');
+        $dql = "SELECT u FROM AppBundle:TbUsuario u WHERE u.stUsuario = false";
+        $query = $em->createQuery($dql);
+        $usuario = $query->getResult();
+
+        return $this->render('AdminBundle:Default:index.html.twig', array(
+            'usuario' => $usuario
+        ));
     }
 
     /**
@@ -95,7 +100,7 @@ class DefaultController extends Controller
                 $usuario->setEndereco($form->get('endereco')->getData());
                 $usuario->setCidade($form->get('cidade')->getData());
                 $usuario->setBairro($form->get('bairro')->getData());
-                $usuario->setComplemento($form->get('complemento')->getData());
+                $usuario->setCep(str_replace('.', '', str_replace('-', '', $form->get('cep')->getData())));
                 $usuario->setComplemento($form->get('complemento')->getData());
                 $usuario->setStUsuario(true);
 

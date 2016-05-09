@@ -80,6 +80,11 @@
                     </li>
                     {% if app.security.granted('ROLE_ADMIN') %}
                         <li>
+                            <a href="{{ path('admin_usuario_listar') }}">
+                                <i class="fa fa-users fa-fw"></i> Cadastrar Usuário
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ path('admin_tipomaterial_listar') }}">
                                 <i class="fa fa-cube fa-fw"></i> Manter tipo de Material Reciclável
                             </a>

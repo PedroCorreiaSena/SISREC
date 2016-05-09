@@ -1,0 +1,12 @@
+{% extends "AdminBundle:Default:layout.html.twig" %}
+
+{% block titulo %}
+    Cadastrar Usuário
+    <a href="{{ path('admin_usuario_manter', {
+        'idUsuario': 0
+    }) }}" type="submit" class="btn btn-primary">Formulário de Cadastro de Acesso</a>
+{% endblock %}
+
+{% block content %}
+    {% include 'AdminBundle:Usuario:listarUtil.html.twig' %}
+{% endblock %}
