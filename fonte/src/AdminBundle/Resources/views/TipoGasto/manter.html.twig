@@ -1,0 +1,30 @@
+{% extends "AdminBundle:Default:layout.html.twig" %}
+
+{% block titulo %}
+    Formulário de Tipo de Gasto
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{{ path('admin_tipogasto_manter', {'idTpGasto': idTpGasto}) }}">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">{{ form_row(form.tpGasto) }}</div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">{{ form_row(form.stTpGasto) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">
+                    {% if idTpGasto %}
+                        Alterar
+                    {% else %}
+                        Incluir
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
