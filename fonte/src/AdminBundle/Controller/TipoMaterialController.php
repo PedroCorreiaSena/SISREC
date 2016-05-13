@@ -102,7 +102,7 @@ class TipoMaterialController extends Controller
         try {
             $em->remove($material);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('notice', "Material de Reciclagem excluído com sucesso!”;");
+            $this->get('session')->getFlashBag()->add('notice', "Material de Reciclagem excluído com sucesso!");
         }catch (DBALException $e){
             $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
         }
