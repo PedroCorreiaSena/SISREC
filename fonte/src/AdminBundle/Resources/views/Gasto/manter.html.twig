@@ -1,0 +1,51 @@
+{% extends "AdminBundle:Default:layout.html.twig" %}
+
+{% block titulo %}
+    Formulário de Cadastro de Gasto
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{{ path('admin_gasto_manter', {'idGastos': idGastos}) }}">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">{{ form_row(form.idTpGasto) }}</div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">{{ form_row(form.vlGasto) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">{{ form_row(form.numNotaFiscal) }}</div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">{{ form_row(form.qtGasto) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">{{ form_row(form.dtGasto) }}</div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">{{ form_row(form.dtPagamento) }}</div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">{{ form_row(form.stPagamento) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">
+                    {% if idGastos %}
+                        Alterar
+                    {% else %}
+                        Incluir
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
