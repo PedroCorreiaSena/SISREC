@@ -167,7 +167,8 @@ class UsuarioType extends AbstractType
         $builder->add('observacao', 'textarea', array(
             'label' => 'Observação',
             'attr' => array(
-                'class' => 'form-control'
+                'class' => 'form-control',
+                'maxlength' => 4000
             )
         ));
 
