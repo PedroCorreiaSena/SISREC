@@ -23,7 +23,7 @@ class TipoGastoType extends AbstractType
             'attr' => array(
                 'class' => 'form-control'
             ),
-            'choices' => array(1 => 'Sim', 0 => 'Não')
+            'choices' => array(1 => 'Ativo', 0 => 'Inativo')
         ));
     }
 
