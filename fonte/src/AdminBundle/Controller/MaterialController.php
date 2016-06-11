@@ -66,6 +66,8 @@ class MaterialController extends Controller
                     $em->persist($material);
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('notice', "Material de Reciclagem cadastrado com sucesso!");
+
+                    return $this->redirectToRoute('admin_material_listar');
                 } else {
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('notice', "Material de Reciclagem alteado com sucesso!");
