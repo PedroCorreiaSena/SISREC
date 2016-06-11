@@ -29,7 +29,7 @@ class DefaultController extends Controller
                 ->where('u.cpf = :cpf')
                 ->setParameter('cpf', str_replace('.', '', str_replace('-', '', $username)));
 
-            $rsUsuario = $qb->getQuery()->getSingleResult();
+            $rsUsuario = $qb->getQuery()->getOneOrNullResult();
 
             $this->get('session')->set('username', $username);
             $this->get('session')->set('cpf', '-', '', $rsUsuario['cpf']);
@@ -89,6 +89,14 @@ class DefaultController extends Controller
             $usuario = new TbUsuario();
 
             try{
+                if(!$form->get('cpf')->getData()){
+                    throw new \Exception("Campo CPF Obrigatório");
+                }
+
+                if($form->get('email')->getData() != $form->get('email_c')->getData()){
+                    throw new \Exception("Os e-mails estão diferentes");
+                }
+
                 $usuario->setCpf(str_replace('.', '', str_replace('-', '', $form->get('cpf')->getData())));
                 $usuario->setNmUsuario($form->get('nmUsuario')->getData());
                 $usuario->setEmail($form->get('email')->getData());

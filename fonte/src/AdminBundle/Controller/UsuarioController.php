@@ -52,20 +52,28 @@ class UsuarioController extends Controller
         if($this->get('request')->getMethod() == 'POST') {
             $form->handleRequest($this->get('request'));
 
-            $usuario->setCpf(str_replace('.', '', str_replace('-', '', $form->get('cpf')->getData())));
-            $usuario->setNmUsuario($form->get('nmUsuario')->getData());
-            $usuario->setEmail($form->get('email')->getData());
-            $usuario->setObservacao($form->get('observacao')->getData());
-            $usuario->setTpSexo($form->get('sexo')->getData());
-            $usuario->setCep($form->get('cep')->getData());
-            $usuario->setUf($form->get('uf')->getData());
-            $usuario->setEndereco($form->get('endereco')->getData());
-            $usuario->setCidade($form->get('cidade')->getData());
-            $usuario->setBairro($form->get('bairro')->getData());
-            $usuario->setCep(str_replace('.', '', str_replace('-', '', $form->get('cep')->getData())));
-            $usuario->setComplemento($form->get('complemento')->getData());
-
             try {
+                if(!$form->get('cpf')->getData()){
+                    throw new \Exception("Campo CPF Obrigatório");
+                }
+
+                if($form->get('email')->getData() != $form->get('email_c')->getData()){
+                    throw new \Exception("Os e-mails estão diferentes");
+                }
+
+                $usuario->setCpf(str_replace('.', '', str_replace('-', '', $form->get('cpf')->getData())));
+                $usuario->setNmUsuario($form->get('nmUsuario')->getData());
+                $usuario->setEmail($form->get('email')->getData());
+                $usuario->setObservacao($form->get('observacao')->getData());
+                $usuario->setTpSexo($form->get('sexo')->getData());
+                $usuario->setCep($form->get('cep')->getData());
+                $usuario->setUf($form->get('uf')->getData());
+                $usuario->setEndereco($form->get('endereco')->getData());
+                $usuario->setCidade($form->get('cidade')->getData());
+                $usuario->setBairro($form->get('bairro')->getData());
+                $usuario->setCep(str_replace('.', '', str_replace('-', '', $form->get('cep')->getData())));
+                $usuario->setComplemento($form->get('complemento')->getData());
+
                 if($usuario->getIdUsuario() == 0){
                     $usuario->setIdPerfil($em->getRepository('AppBundle:TbPerfil')->find(2));
                     $usuario->setStUsuario(false);
