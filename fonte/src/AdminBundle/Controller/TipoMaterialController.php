@@ -48,9 +48,11 @@ class TipoMaterialController extends Controller
                     $em->persist($tipoMaterial);
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('notice', "Material de Reciclagem cadastrado com sucesso!");
+
+                    return $this->redirectToRoute('admin_tipomaterial_listar');
                 } else {
                     $em->flush();
-                    $this->get('session')->getFlashBag()->add('notice', "Material de Reciclagem alteado com sucesso!");
+                    $this->get('session')->getFlashBag()->add('notice', "Material de Reciclagem alterado com sucesso!");
                 }
             } catch(\Exception $e){
                 $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
