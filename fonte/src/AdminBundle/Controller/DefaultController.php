@@ -133,6 +133,8 @@ class DefaultController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('notice', "Cadastro realizado com sucesso! Será enviada uma confirmação de cadastro para o e-mail informado");
+
+                return $this->redirectToRoute('admin_login');
             } catch(\Exception $e){
                 $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
             }
