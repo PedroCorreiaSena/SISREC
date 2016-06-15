@@ -76,6 +76,28 @@ class GastoType extends AbstractType
             ),
             'choices' => array(1 => 'Ativo', 0 => 'Inativo')
         ));
+
+        $builder->add('datInicio', 'text', array(
+            'label' => 'Data Inicio',
+            'required' => false,
+            'attr' => array(
+                'class' => 'form-control',
+                'maxlength' => 200,
+                'mask' => '99/99/9999',
+                'placeholder' => 'Data Inicio'
+            )
+        ));
+
+        $builder->add('datFim', 'text', array(
+            'label' => 'Data Fim',
+            'required' => false,
+            'attr' => array(
+                'class' => 'form-control',
+                'maxlength' => 200,
+                'mask' => '99/99/9999',
+                'placeholder' => 'Data Fim'
+            )
+        ));
     }
 
     public function getName() {

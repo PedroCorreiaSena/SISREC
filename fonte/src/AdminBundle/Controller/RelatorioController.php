@@ -3,6 +3,7 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Form\MaterialType;
+use AdminBundle\Form\GastoType;
 use AppBundle\Entity\TbGasto;
 use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -69,6 +70,47 @@ class RelatorioController extends Controller
      * @Security("has_role('ROLE_ASSOCIADO')")
      */
     public function gastoAction() {
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(new GastoType());
+        $gasto = null;
 
+        if($this->get('request')->getMethod() == 'POST') {
+            $form->handleRequest($this->get('request'));
+
+            $bind = array();
+            $dql = "SELECT m FROM AppBundle:TbGasto m WHERE 1=1 ";
+
+            if ($form->get('idTpGasto')->getData()) {
+                $dql .= " AND m.idTpGasto = :idTpGasto ";
+                $bind['idTpGasto'] = $form->get('idTpGasto')->getData()->getIdTpGasto();
+            }
+
+            if($form->get('datInicio')->getData()){
+                $dql .= " AND m.dtGasto >= :datInicio ";
+                $bind['datInicio'] = sprintf('%s 00:00:00', $form->get('datInicio')->getData());
+                $bind['datInicio'] = \DateTime::createFromFormat('d/m/Y H:i:s', $bind['datInicio']);
+            }
+
+            if($form->get('datFim')->getData()){
+                $dql .= " AND m.dtGasto <= :datFim ";
+                $bind['datFim'] = sprintf('%s 00:00:00', $form->get('datFim')->getData());
+                $bind['datFim'] = \DateTime::createFromFormat('d/m/Y H:i:s', $bind['datFim']);
+            }
+
+            $query = $em->createQuery($dql);
+
+            if(count($bind)) {
+                foreach($bind as $param => $value) {
+                    $query->setParameter($param, $value);
+                }
+            }
+
+            $gasto = $query->getResult();
+        }
+
+        return $this->render('AdminBundle:Relatorio:gasto.html.twig', array(
+            'gasto' => $gasto,
+            'form' => $form->createView()
+        ));
     }
 }
