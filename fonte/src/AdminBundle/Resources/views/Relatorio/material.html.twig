@@ -1,0 +1,81 @@
+{% extends "AdminBundle:Default:layout.html.twig" %}
+
+{% block titulo %}
+    Relatório Material
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Filtrar</strong></div>
+                <div class="panel-body">
+                    <form method="post" action="{{ admin_relatorio_material }}" novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">{{ form_row(form.idTpMaterial) }}</div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div><label>Período</label></div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            {{ form_widget(form.datInicio) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            {{ form_widget(form.datFim) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-right">
+                                <button type="submit" class="btn btn-primary">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if material %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-12"><div class="panel-datatable-ctrls"></div></div>
+                        </div>
+                    </div>
+                    <div class="table-responsive table-responsive-datatable">
+                        <table class="table table-striped table-hover table-bordered" cellspacing="0" id="datatable">
+                            <thead>
+                            <tr>
+                                <th>Quantidade</th>
+                                <th>Valor Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in material %}
+                                <tr>
+                                    <td>{{ item.qtMaterial }}</td>
+                                    <td>{{ item.totalMaterial }}</td>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
