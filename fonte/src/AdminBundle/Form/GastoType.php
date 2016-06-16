@@ -5,8 +5,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class GastoType
+ * @package AdminBundle\Form
+ */
 class GastoType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('idTpGasto', 'entity', array(
@@ -100,6 +108,9 @@ class GastoType extends AbstractType
         ));
     }
 
+    /**
+     * @return string
+     */
     public function getName() {
         return 'gasto';
     }

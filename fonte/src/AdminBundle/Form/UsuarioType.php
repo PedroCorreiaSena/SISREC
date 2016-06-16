@@ -5,8 +5,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class UsuarioType
+ * @package AdminBundle\Form
+ */
 class UsuarioType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('nmUsuario', 'text', array(
@@ -215,6 +223,9 @@ class UsuarioType extends AbstractType
         ));
     }
 
+    /**
+     * @return string
+     */
     public function getName() {
         return 'usuario';
     }

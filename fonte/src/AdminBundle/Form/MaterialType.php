@@ -5,8 +5,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class MaterialType
+ * @package AdminBundle\Form
+ */
 class MaterialType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('idTpMaterial', 'entity', array(
@@ -72,6 +80,9 @@ class MaterialType extends AbstractType
         ));
     }
 
+    /**
+     * @return string
+     */
     public function getName() {
         return 'material';
     }

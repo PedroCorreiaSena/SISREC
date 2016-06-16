@@ -5,8 +5,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class TipoMaterialType
+ * @package AdminBundle\Form
+ */
 class TipoMaterialType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('tpMaterial', 'text', array(
@@ -27,6 +35,9 @@ class TipoMaterialType extends AbstractType
         ));
     }
 
+    /**
+     * @return string
+     */
     public function getName() {
         return 'tipomaterial';
     }

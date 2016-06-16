@@ -17,11 +17,19 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Class TipoMaterialController
+ * @package AdminBundle\Controller
+ */
 class TipoMaterialController extends Controller
 {
     /**
+     * Funcionalidade de incluir/alterar tipo material
+     *
      * @Route("tipoMaterial/manter/{idTpMaterial}", name="admin_tipomaterial_manter")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param $idTpMaterial
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function manterAction($idTpMaterial) {
         $form = $this->createForm(new TipoMaterialType());
@@ -73,8 +81,11 @@ class TipoMaterialController extends Controller
     }
 
     /**
+     * Funcionalidade de listar tipo material
+     *
      * @Route("tipoMaterial/listar", name="admin_tipomaterial_listar")
      * @Security("has_role('ROLE_ADMIN')")
+     * @return Response
      */
     public function listarAction() {
         $dql = "SELECT m FROM AppBundle:TbTpMaterial m";
@@ -89,8 +100,12 @@ class TipoMaterialController extends Controller
     }
 
     /**
+     * Funcionalidade de excluir tipo material
+     *
      * @Route("tipoMaterial/excluir/{idTpMaterial}", name="admin_tipomaterial_excluir")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param $idTpMaterial
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function excluirAction($idTpMaterial){
         $em = $this->getDoctrine()->getEntityManager();

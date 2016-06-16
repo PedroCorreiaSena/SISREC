@@ -14,11 +14,18 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Class RelatorioController
+ * @package AdminBundle\Controller
+ */
 class RelatorioController extends Controller
 {
     /**
+     * Relatório de material
+     *
      * @Route("relatorio/material", name="admin_relatorio_material")
      * @Security("has_role('ROLE_ASSOCIADO')")
+     * @return Response
      */
     public function materialAction() {
         $em = $this->getDoctrine()->getManager();
@@ -66,8 +73,11 @@ class RelatorioController extends Controller
     }
 
     /**
+     * Relatório de gasto
+     *
      * @Route("relatorio/gasto", name="admin_relatorio_gasto")
      * @Security("has_role('ROLE_ASSOCIADO')")
+     * @return Response
      */
     public function gastoAction() {
         $em = $this->getDoctrine()->getManager();

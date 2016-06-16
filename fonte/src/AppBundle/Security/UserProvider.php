@@ -7,6 +7,10 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ORM\EntityManager;
 
+/**
+ * Class UserProvider
+ * @package AppBundle\Security
+ */
 class UserProvider implements UserProviderInterface {
     protected $em;
 

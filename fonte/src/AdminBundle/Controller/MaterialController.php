@@ -17,11 +17,19 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Class MaterialController
+ * @package AdminBundle\Controller
+ */
 class MaterialController extends Controller
 {
     /**
+     * Funcionalidade de alterar/incluir material
+     *
      * @Route("material/manter/{idMaterial}", name="admin_material_manter")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param int $idMaterial
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function manterAction($idMaterial) {
         $form = $this->createForm(new MaterialType());
@@ -93,8 +101,11 @@ class MaterialController extends Controller
     }
 
     /**
+     * Funcionalidade de listar material
+     *
      * @Route("material/listar", name="admin_material_listar")
      * @Security("has_role('ROLE_ADMIN')")
+     * @return Response
      */
     public function listarAction() {
         $dql = "SELECT m FROM AppBundle:TbMaterial m";
@@ -109,8 +120,12 @@ class MaterialController extends Controller
     }
 
     /**
+     * Funcionalidade de excluir material
+     *
      * @Route("material/excluir/{idMaterial}", name="admin_material_excluir")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param int $idMaterial
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function excluirAction($idMaterial){
         $em = $this->getDoctrine()->getEntityManager();

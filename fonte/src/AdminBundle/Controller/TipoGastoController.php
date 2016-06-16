@@ -13,11 +13,19 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Class TipoGastoController
+ * @package AdminBundle\Controller
+ */
 class TipoGastoController extends Controller
 {
     /**
+     * Funcionalidade de incluir/alterar tipo gasto
+     *
      * @Route("tipoGasto/manter/{idTpGasto}", name="admin_tipogasto_manter")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param $idTpGasto
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function manterAction($idTpGasto) {
         $form = $this->createForm(new TipoGastoType());
@@ -67,8 +75,11 @@ class TipoGastoController extends Controller
     }
 
     /**
+     * Funcionalidade de listar tipo gasto
+     *
      * @Route("tipoGasto/listar", name="admin_tipogasto_listar")
      * @Security("has_role('ROLE_ADMIN')")
+     * @return Response
      */
     public function listarAction() {
         $dql = "SELECT m FROM AppBundle:TbTipoGasto m";
@@ -83,8 +94,12 @@ class TipoGastoController extends Controller
     }
 
     /**
+     * Funcionalidade de excluir tipo gasto
+     *
      * @Route("tipoGasto/excluir/{idTpGasto}", name="admin_tipogasto_excluir")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param $idTpGasto
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function excluirAction($idTpGasto){
         $em = $this->getDoctrine()->getEntityManager();

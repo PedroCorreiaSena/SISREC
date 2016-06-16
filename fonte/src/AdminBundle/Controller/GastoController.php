@@ -13,11 +13,19 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Class GastoController
+ * @package AdminBundle\Controller
+ */
 class GastoController extends Controller
 {
     /**
+     * Funcionalidade de alterar/incluir gasto
+     *
      * @Route("gasto/manter/{idGastos}", name="admin_gasto_manter")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param int $idGastos
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function manterAction($idGastos) {
         $form = $this->createForm(new GastoType());
@@ -99,8 +107,11 @@ class GastoController extends Controller
     }
 
     /**
+     * Funcionalidade de listar gasto
+     *
      * @Route("gasto/listar", name="admin_gasto_listar")
      * @Security("has_role('ROLE_ADMIN')")
+     * @return Response
      */
     public function listarAction() {
         $dql = "SELECT m FROM AppBundle:TbGasto m";
@@ -115,8 +126,12 @@ class GastoController extends Controller
     }
 
     /**
+     * Funcionalidade de excluir gasto
+     *
      * @Route("gasto/excluir/{idGastos}", name="admin_gasto_excluir")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param int $idGastos
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function excluirAction($idGastos){
         $em = $this->getDoctrine()->getEntityManager();

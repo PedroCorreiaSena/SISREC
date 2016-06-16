@@ -12,11 +12,18 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Class UsuarioController
+ * @package AdminBundle\Controller
+ */
 class UsuarioController extends Controller
 {
     /**
+     * Funcionalidade de listar usuário
+     *
      * @Route("usuario/listar", name="admin_usuario_listar")
      * @Security("has_role('ROLE_ADMIN')")
+     * @return Response
      */
     public function listarAction() {
         $dql = "SELECT m FROM AppBundle:TbUsuario m";
@@ -31,8 +38,12 @@ class UsuarioController extends Controller
     }
 
     /**
+     * Funcionalidade de incluir/alterar usuário
+     *
      * @Route("usuario/manter/{idUsuario}", name="admin_usuario_manter")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param $idUsuario
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function manterAction($idUsuario) {
         $form = $this->createForm(new UsuarioType());
@@ -132,8 +143,12 @@ class UsuarioController extends Controller
     }
 
     /**
+     * Funcionalidade de manter situação do usuário
+     *
      * @Route("usuario/situacao/{idUsuario}", name="admin_usuario_situacao")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param $idUsuario
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function situacaoAction($idUsuario) {
         $form = $this->createForm(new UsuarioType());

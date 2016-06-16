@@ -13,10 +13,17 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Class DefaultController
+ * @package AdminBundle\Controller
+ */
 class DefaultController extends Controller
 {
     /**
+     * Página inicial
+     *
      * @Route("/", name="admin_index")
+     * @return Response
      */
     public function indexAction() {
         $username = $this->get('security.context')->getToken()->getUser()->getUsername();
@@ -49,7 +56,11 @@ class DefaultController extends Controller
     }
 
     /**
+     * Hook Login
+     *
      * @Route("/login", name="admin_login")
+     * @param Request $request
+     * @return Response
      */
     public function loginAction(Request $request){
         $form = $this->createForm(new LoginType());
@@ -78,7 +89,10 @@ class DefaultController extends Controller
     public function logoutAction(){}
 
     /**
+     * Página Solicitar Acesso
+     *
      * @Route("/solicitaracesso", name="admin_solicitaracesso")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function solicitaracessoAction() {
         $form = $this->createForm(new UsuarioType());
@@ -146,7 +160,10 @@ class DefaultController extends Controller
     }
 
     /**
+     * Página recuperar senha
+     *
      * @Route("/recuperarsenha", name="admin_recuperarsenha")
+     * @return Response
      */
     public function recuperarsenhaAction() {
         $form = $this->createForm(new UsuarioType());
