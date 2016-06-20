@@ -84,9 +84,13 @@ class MaterialController extends Controller
                 $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
             }
 
-            return $this->redirectToRoute('admin_material_manter', array(
-                'idMaterial' => (int) @$material->getIdMaterial()
-            ));
+            if($idMaterial == 0) {
+                return $this->redirectToRoute('admin_material_listar');
+            }else{
+                return $this->redirectToRoute('admin_material_manter', array(
+                    'idMaterial' => (int) @$material->getIdMaterial()
+                ));
+            }
         }else{
             $form->get('idTpMaterial')->setData($material->getIdTpMaterial());
             $form->get('qtMaterial')->setData($material->getQtMaterial());

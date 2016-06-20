@@ -60,9 +60,14 @@ class TipoGastoController extends Controller
                 $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
             }
 
-            return $this->redirectToRoute('admin_tipogasto_manter', array(
-                'idTpGasto' => (int) @$tipoGasto->getIdTpGasto()
-            ));
+
+            if($idTpGasto == 0) {
+                return $this->redirectToRoute('admin_tipogasto_listar');
+            }else{
+                return $this->redirectToRoute('admin_tipogasto_manter', array(
+                    'idTpGasto' => (int) @$tipoGasto->getIdTpGasto()
+                ));
+            }
         }else{
             $form->get('tpGasto')->setData($tipoGasto->getTpGasto());
             $form->get('stTpGasto')->setData($tipoGasto->getTpGasto());

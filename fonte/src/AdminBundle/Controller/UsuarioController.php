@@ -117,9 +117,13 @@ class UsuarioController extends Controller
                 $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
             }
 
-            return $this->redirectToRoute('admin_usuario_manter', array(
-                'idUsuario' => (int) @$usuario->getIdUsuario()
-            ));
+            if($idUsuario == 0) {
+                return $this->redirectToRoute('admin_usuario_listar');
+            }else{
+                return $this->redirectToRoute('admin_usuario_manter', array(
+                    'idUsuario' => (int) @$usuario->getIdUsuario()
+                ));
+            }
         }else{
             $form->get('cpf')->setData($usuario->getCpf());
             $form->get('nmUsuario')->setData($usuario->getNmUsuario());

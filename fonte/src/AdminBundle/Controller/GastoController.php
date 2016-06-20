@@ -81,9 +81,13 @@ class GastoController extends Controller
                 $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
             }
 
-            return $this->redirectToRoute('admin_gasto_manter', array(
-                'idGastos' => (int) @$gasto->getIdGastos()
-            ));
+            if($idGastos == 0) {
+                return $this->redirectToRoute('admin_gasto_listar');
+            }else{
+                return $this->redirectToRoute('admin_gasto_manter', array(
+                    'idGastos' => (int)@$gasto->getIdGastos()
+                ));
+            }
         }else{
             $form->get('idTpGasto')->setData($gasto->getIdTpGasto());
             $form->get('vlGasto')->setData($gasto->getVlGasto());

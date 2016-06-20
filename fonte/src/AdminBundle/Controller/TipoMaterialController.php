@@ -66,9 +66,14 @@ class TipoMaterialController extends Controller
                 $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
             }
 
-            return $this->redirectToRoute('admin_tipomaterial_manter', array(
-                'idTpMaterial' => (int) @$tipoMaterial->getIdTpMaterial()
-            ));
+
+            if($idTpMaterial == 0) {
+                return $this->redirectToRoute('admin_tipomaterial_listar');
+            }else{
+                return $this->redirectToRoute('admin_tipomaterial_manter', array(
+                    'idTpMaterial' => (int) @$tipoMaterial->getIdTpMaterial()
+                ));
+            }
         }else{
             $form->get('tpMaterial')->setData($tipoMaterial->getTpMaterial());
             $form->get('stMaterial')->setData($tipoMaterial->getStMaterial());
