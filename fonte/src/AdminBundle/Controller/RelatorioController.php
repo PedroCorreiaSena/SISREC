@@ -20,6 +20,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  */
 class RelatorioController extends Controller
 {
+    const MSG_DATA = "Data fim não pode ser menor que a data inicio.";
+
     /**
      * Relatório de material
      *
@@ -53,6 +55,12 @@ class RelatorioController extends Controller
                 $dql .= " AND m.dtInclusao <= :datFim ";
                 $bind['datFim'] = sprintf('%s 00:00:00', $form->get('datFim')->getData());
                 $bind['datFim'] = \DateTime::createFromFormat('d/m/Y H:i:s', $bind['datFim']);
+
+                if(isset($bind['datInicio'])){
+                    if($bind['datFim'] < $bind['datInicio']){
+                        $this->get('session')->getFlashBag()->add('warning', self::MSG_DATA);
+                    }
+                }
             }
 
             $query = $em->createQuery($dql);
@@ -105,6 +113,12 @@ class RelatorioController extends Controller
                 $dql .= " AND m.dtGasto <= :datFim ";
                 $bind['datFim'] = sprintf('%s 00:00:00', $form->get('datFim')->getData());
                 $bind['datFim'] = \DateTime::createFromFormat('d/m/Y H:i:s', $bind['datFim']);
+
+                if(isset($bind['datInicio'])){
+                    if($bind['datFim'] < $bind['datInicio']){
+                        $this->get('session')->getFlashBag()->add('warning', self::MSG_DATA);
+                    }
+                }
             }
 
             $query = $em->createQuery($dql);
