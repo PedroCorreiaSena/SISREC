@@ -45,4 +45,11 @@ $(document).ready(function() {
     $('[mask]').each(function () {
         $(this).mask($(this).attr('mask'));
     });
+
+    // Validação de data
+    $('[mask="99/99/9999"]').blur(function(){
+        if(!moment($(this).val(), 'DD/MM/YYYY', true).isValid()){
+            $(this).val('');
+        }
+    });
 });
