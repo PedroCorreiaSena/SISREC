@@ -198,4 +198,39 @@ class UsuarioController extends Controller
             'idUsuario' => $idUsuario
         ));
     }
+
+    /**
+     * Funcionalidade de excluir usuário
+     *
+     * @Route("usuario/excluir/{idUsuario}", name="admin_usuario_excluir")
+     * @Security("has_role('ROLE_ADMIN')")
+     * @param int $idUsuario
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function excluirAction($idUsuario){
+        $em = $this->getDoctrine()->getEntityManager();
+
+        try {
+            // Excluir telefones
+            $dql = "SELECT t FROM AppBundle:TbTelefone t WHERE t.idUsuario = :idUsuario";
+            $query = $em->createQuery($dql);
+            $query->setParameter('idUsuario', $idUsuario);
+            $rsTelefone = $query->getResult();
+
+            foreach($rsTelefone as $item){
+                $em->remove($item);
+            }
+
+            // Excluir Usuário
+            $em->remove($em->getRepository('AppBundle:TbUsuario')->find($idUsuario));
+
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('notice', "Usuário excluído com sucesso!");
+        }catch (DBALException $e){
+            $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
+        }
+
+        return $this->redirectToRoute('admin_usuario_listar');
+    }
 }

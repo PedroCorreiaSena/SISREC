@@ -37,6 +37,12 @@
                                     <span class="fa fa-eye"></span>
                                     Visualizar Usuário
                                 </a>
+                                <a href="{{ path('admin_usuario_excluir', {
+                                    'idUsuario': item.idUsuario
+                                }) }}" type="button" class="btn btn-danger btn-xs">
+                                    <span class="fa fa-trash"></span>
+                                    Excluir Usuário
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}
