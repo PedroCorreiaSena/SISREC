@@ -84,9 +84,11 @@ class UsuarioController extends Controller
                 $usuario->setBairro($form->get('bairro')->getData());
                 $usuario->setCep(str_replace('.', '', str_replace('-', '', $form->get('cep')->getData())));
                 $usuario->setComplemento($form->get('complemento')->getData());
+                $usuario->setDtNascimento($form->get('dtNascimento')->getData());
+                $usuario->setNumCasa($form->get('casa')->getData());
+                $usuario->setIdPerfil($form->get('idPerfil')->getData());
 
                 if($usuario->getIdUsuario() == 0){
-                    $usuario->setIdPerfil($em->getRepository('AppBundle:TbPerfil')->find(2));
                     $usuario->setStUsuario(false);
                     $usuario->setSenha('010203');
 
@@ -110,6 +112,19 @@ class UsuarioController extends Controller
 
                     $this->get('session')->getFlashBag()->add('notice', "Usuario cadastrado com sucesso!");
                 } else {
+                    // Telefone
+                    $dql = "SELECT t FROM AppBundle:TbTelefone t WHERE t.idUsuario = :idUsuario";
+                    $query = $em->createQuery($dql);
+                    $query->setParameter('idUsuario', $idUsuario);
+                    $rsTelefone = $query->getResult();
+
+                    if(count($rsTelefone) == 2){
+                        $rsTelefone[0]->setDddTelefone($form->get('ddd_p')->getData());
+                        $rsTelefone[0]->setNumTelefone($form->get('telefone_p')->getData());
+                        $rsTelefone[1]->setDddTelefone($form->get('ddd_a')->getData());
+                        $rsTelefone[1]->setNumTelefone($form->get('telefone_a')->getData());
+                    }
+
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('notice', "Usuario alteado com sucesso!");
                 }
@@ -125,6 +140,18 @@ class UsuarioController extends Controller
                 ));
             }
         }else{
+            $dql = "SELECT t FROM AppBundle:TbTelefone t WHERE t.idUsuario = :idUsuario";
+            $query = $em->createQuery($dql);
+            $query->setParameter('idUsuario', $idUsuario);
+            $rsTelefone = $query->getResult();
+
+            if(count($rsTelefone) == 2){
+                $form->get('ddd_p')->setData($rsTelefone[0]->getDddTelefone());
+                $form->get('telefone_p')->setData($rsTelefone[0]->getNumTelefone());
+                $form->get('ddd_a')->setData($rsTelefone[1]->getDddTelefone());
+                $form->get('telefone_a')->setData($rsTelefone[1]->getNumTelefone());
+            }
+
             $form->get('cpf')->setData($usuario->getCpf());
             $form->get('nmUsuario')->setData($usuario->getNmUsuario());
             $form->get('email')->setData($usuario->getEmail());
@@ -137,6 +164,9 @@ class UsuarioController extends Controller
             $form->get('cidade')->setData($usuario->getCidade());
             $form->get('bairro')->setData($usuario->getBairro());
             $form->get('complemento')->setData($usuario->getComplemento());
+            $form->get('dtNascimento')->setData($usuario->getDtNascimento());
+            $form->get('casa')->setData($usuario->getDtNascimento());
+            $form->get('idPerfil')->setData($usuario->getIdPerfil());
         }
 
         return $this->render('AdminBundle:Usuario:manter.html.twig', array(

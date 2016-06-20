@@ -416,4 +416,60 @@ class TbUsuario
     {
         return $this->idPerfil;
     }
+    /**
+     * @var string
+     */
+    private $numCasa;
+
+    /**
+     * @var string
+     */
+    private $dtNascimento;
+
+
+    /**
+     * Set numCasa
+     *
+     * @param string $numCasa
+     * @return TbUsuario
+     */
+    public function setNumCasa($numCasa)
+    {
+        $this->numCasa = $numCasa;
+
+        return $this;
+    }
+
+    /**
+     * Get numCasa
+     *
+     * @return string 
+     */
+    public function getNumCasa()
+    {
+        return $this->numCasa;
+    }
+
+    /**
+     * Set dtNascimento
+     *
+     * @param string $dtNascimento
+     * @return TbUsuario
+     */
+    public function setDtNascimento($dtNascimento)
+    {
+        $this->dtNascimento = $dtNascimento;
+
+        return $this;
+    }
+
+    /**
+     * Get dtNascimento
+     *
+     * @return string 
+     */
+    public function getDtNascimento()
+    {
+        return $this->dtNascimento;
+    }
 }

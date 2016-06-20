@@ -20,6 +20,8 @@
     <field name="bairro" type="string" column="bairro" length="100" nullable="false"/>
     <field name="complemento" type="string" column="complemento" length="100" nullable="false"/>
     <field name="stUsuario" type="boolean" column="st_usuario" nullable="false"/>
+    <field name="numCasa" type="string" column="num_casa" length="45" nullable="true"/>
+    <field name="dtNascimento" type="string" column="dt_nascimento" length="45" nullable="true"/>
     <many-to-one field="idPerfil" target-entity="TbPerfil">
       <join-columns>
         <join-column name="id_perfil" referenced-column-name="id_perfil"/>

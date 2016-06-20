@@ -125,7 +125,8 @@ class DefaultController extends Controller
                 $usuario->setCep(str_replace('.', '', str_replace('-', '', $form->get('cep')->getData())));
                 $usuario->setComplemento($form->get('complemento')->getData());
                 $usuario->setStUsuario(false);
-
+                $usuario->setDtNascimento($form->get('dtNascimento')->getData());
+                $usuario->setNumCasa($form->get('casa')->getData());
                 $usuario->setIdPerfil($em->getRepository('AppBundle:TbPerfil')->find(2));
 
                 $em->persist($usuario);

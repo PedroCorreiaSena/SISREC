@@ -80,4 +80,32 @@ class TbPerfil
     {
         return $this->idPerfil;
     }
+    /**
+     * @var string
+     */
+    private $desPerfil;
+
+
+    /**
+     * Set desPerfil
+     *
+     * @param string $desPerfil
+     * @return TbPerfil
+     */
+    public function setDesPerfil($desPerfil)
+    {
+        $this->desPerfil = $desPerfil;
+
+        return $this;
+    }
+
+    /**
+     * Get desPerfil
+     *
+     * @return string 
+     */
+    public function getDesPerfil()
+    {
+        return $this->desPerfil;
+    }
 }

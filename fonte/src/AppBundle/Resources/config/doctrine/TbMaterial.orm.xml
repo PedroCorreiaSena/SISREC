@@ -13,14 +13,14 @@
     <field name="vlMaterial" type="decimal" column="vl_material" precision="18" scale="2" nullable="false"/>
     <field name="dsMaterial" type="string" column="ds_material" length="100" nullable="false"/>
     <field name="totalMaterial" type="decimal" column="total_material" precision="18" scale="2" nullable="false"/>
-    <many-to-one field="idTpMaterial" target-entity="TbTpMaterial">
-      <join-columns>
-        <join-column name="id_tp_material" referenced-column-name="id_tp_material"/>
-      </join-columns>
-    </many-to-one>
     <many-to-one field="idUsuario" target-entity="TbUsuario">
       <join-columns>
         <join-column name="id_usuario" referenced-column-name="id_usuario"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTpMaterial" target-entity="TbTpMaterial">
+      <join-columns>
+        <join-column name="id_tp_material" referenced-column-name="id_tp_material"/>
       </join-columns>
     </many-to-one>
   </entity>

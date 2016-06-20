@@ -17,6 +17,19 @@ class UsuarioType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('idPerfil', 'entity', array(
+            'label' => 'Perfil',
+            'attr' => array(
+                'class' => 'form-control',
+                'required' => "required",
+            ),
+            'class' => 'AppBundle:TbPerfil',
+            'property' => 'desPerfil',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('p')->where("p.stPerfil = 1");
+            },
+        ));
+
         $builder->add('nmUsuario', 'text', array(
             'label' => 'Nome',
             'attr' => array(
