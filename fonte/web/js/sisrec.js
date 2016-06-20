@@ -52,4 +52,11 @@ $(document).ready(function() {
             $(this).val('');
         }
     });
+
+    // Trim Campos
+    $('[type="text"]').each(function(){
+        $(this).blur(function(){
+            $(this).val($(this).val().trim());
+        });
+    });
 });
