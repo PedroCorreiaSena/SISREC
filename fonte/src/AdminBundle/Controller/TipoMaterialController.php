@@ -10,6 +10,7 @@ use AppBundle\Entity\TbUsuario;
 use AppBundle\Form\LoginType;
 use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -52,6 +53,19 @@ class TipoMaterialController extends Controller
             $tipoMaterial->setStMaterial($form->get('stMaterial')->getData());
 
             try {
+                // Verificar dados cadastrados
+                $dql = "SELECT m FROM AppBundle:TbTpMaterial m
+                        WHERE upper(trim(m.tpMaterial)) = :tpMaterial";
+
+                $query = $em->createQuery($dql);
+                $query->setParameter('tpMaterial', trim(strtoupper($tipoMaterial->getTpMaterial())));
+
+                $materiais = $query->getResult();
+
+                if($materiais){
+                    throw new \Exception("Já existe esse material cadastrado!");
+                }
+
                 if($tipoMaterial->getIdTpMaterial() == 0){
                     $em->persist($tipoMaterial);
                     $em->flush();
