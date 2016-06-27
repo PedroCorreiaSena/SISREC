@@ -20,31 +20,16 @@ class UserProvider implements UserProviderInterface {
 
     public function loadUserByUsername($username) {
         $qb = $this->em->createQueryBuilder();
-        $qb->select('u.senha')
+        $qb->select('u.senha, p.tpPerfil')
             ->from('AppBundle:TbUsuario', 'u')
+            ->join("u.idPerfil", 'p')
             ->where('u.cpf = :cpf AND u.stUsuario = 1')
             ->setParameter('cpf', str_replace('.', '', str_replace('-', '', $username)));
 
         $rsUsuario = $qb->getQuery()->getOneOrNullResult();
 
         if($rsUsuario) {
-            /*$qb = $this->em->createQueryBuilder();
-            $qb->select('u')
-                ->from('AppBundle:TblUsuario', 'u')
-                ->where('u.desEmail = :desEmail AND u.sitAtivo = 1')
-                ->setParameter('desEmail', $username);
-
-            $rs = $qb->getQuery()->getResult();
-
-            $roles = array();
-
-            if(count($rs)){
-                foreach($rs as $item) {
-                    $roles[] = $item->getDesNivel();
-                }
-            }*/
-
-            return new User($username, $rsUsuario['senha'], '', array('ROLE_ADMIN'));
+            return new User($username, $rsUsuario['senha'], '', array($rsUsuario['tpPerfil']));
         }else{
             throw new UsernameNotFoundException(
                 sprintf('Username "%s" does not exist.', $username)

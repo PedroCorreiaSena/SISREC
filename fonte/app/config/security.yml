@@ -40,4 +40,4 @@ security:
                 target: admin_index
 
     access_control:
-        - { path: ^/$, roles: [ROLE_ADMIN] }
+        - { path: ^/$, roles: [ROLE_ASSOCIADO] }
