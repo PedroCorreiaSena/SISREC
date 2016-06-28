@@ -50,7 +50,7 @@ class GastoController extends Controller
             $gasto->setNumNotaFiscal((int) $form->get('numNotaFiscal')->getData());
             $gasto->setQtGasto((int) $form->get('qtGasto')->getData());
             $gasto->setDtGasto(\DateTime::createFromFormat('d/m/Y', $form->get('dtGasto')->getData()));
-            $gasto->setTotalCompra($gasto->getVlGasto() * $gasto->getVlGasto());
+            $gasto->setTotalCompra($gasto->getVlGasto() * $gasto->getQtGasto());
             $gasto->setDtPagamento(\DateTime::createFromFormat('d/m/Y', $form->get('dtPagamento')->getData()));
             $gasto->setStPagamento($form->get('stPagamento')->getData());
 
